@@ -1,24 +1,62 @@
+package hackerrank.hashing;
+
 import java.awt.Toolkit;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.StringWriter;
-import java.util.Arrays;
-import java.util.Enumeration;
-import java.util.Scanner;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Stream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
+import static java.util.stream.Collectors.toList;
 
+public class CountTriplets {
 
+    // Complete the countTriplets function below.
+    static long countTriplets(List<Long> arr, long r) {
 
-    private static void runTestCase(String testCase, Scanner scanner, Scanner output) {
+        long count = 0;
+        Map<Long, Long> p2 = new HashMap<>();
+        Map<Long, Long> p3 = new HashMap<>();
+
+        for (Long v : arr) {
+
+            count += p3.getOrDefault(v, 0L);
+
+            if (p2.containsKey(v)) {
+                p3.put(v * r, p3.getOrDefault(v * r, 0L) + p2.get(v));
+            }
+
+            p2.put(v * r, p2.getOrDefault(v * r, 0L) + 1);
+        }
+
+        return count;
+    }
+
+    private static void runTestCase(String testCase, BufferedReader bufferedReader, Scanner output)
+            throws IOException {
 
         StringWriter bufferedWriter = new StringWriter();
 
         // ----------------
 
+        String[] nr = bufferedReader.readLine().replaceAll("\\s+$", "").split(" ");
 
+        int n = Integer.parseInt(nr[0]);
+
+        long r = Long.parseLong(nr[1]);
+
+        List<Long> arr = Stream.of(bufferedReader.readLine().replaceAll("\\s+$", "").split(" "))
+                .map(Long::parseLong)
+                .collect(toList());
+
+        long ans = countTriplets(arr, r);
+
+        bufferedWriter.write(String.valueOf(ans));
         // ----------------
 
         String resultStr = bufferedWriter.toString();
@@ -37,7 +75,7 @@ import java.util.zip.ZipFile;
 
     public static void main(String[] args) throws IOException {
 
-        String testCases = System.getenv("TESTCASES") + "/.zip";
+        String testCases = System.getenv("TESTCASES") + "/count-triplets-1-testcases.zip";
 
         Pattern pattern = Pattern.compile("input/input(\\d+).txt");
 
@@ -49,18 +87,20 @@ import java.util.zip.ZipFile;
             while (matcher.find()) {
                 String testCase = matcher.group(1);
 
-                Scanner inputScanner = new Scanner(zipFile.getInputStream(entry));
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(zipFile.getInputStream(entry)));
 
                 ZipEntry output = zipFile.getEntry(String.format("output/output%s.txt",
                         testCase));
                 Scanner outputScanner = new Scanner(zipFile.getInputStream(output));
 
-                runTestCase(testCase, inputScanner, outputScanner);
+                runTestCase(testCase, bufferedReader, outputScanner);
 
-                inputScanner.close();
+                bufferedReader.close();
                 outputScanner.close();
             }
 
         }
 
     }
+
+}
