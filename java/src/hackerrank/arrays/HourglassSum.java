@@ -1,4 +1,4 @@
-package hackerrank.arrays.twodarrays;
+package hackerrank.arrays;
 
 import java.io.IOException;
 import java.util.Enumeration;
@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
-public class Solution {
+public class HourglassSum {
 
     // Complete the hourglassSum function below.
     static int hourglassSum(int[][] arr) {
@@ -27,7 +27,6 @@ public class Solution {
                 }
             }
         }
-
         return max;
     }
 
