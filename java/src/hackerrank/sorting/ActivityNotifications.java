@@ -14,6 +14,8 @@ import java.util.zip.ZipFile;
 
 public class ActivityNotifications {
 
+    // Don't use the counting sort, but rather two priority queues
+
 
     // Complete the activityNotifications function below.
 //    static int activityNotifications(int[] expenditure, int d) {
