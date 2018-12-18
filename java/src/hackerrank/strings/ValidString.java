@@ -26,7 +26,7 @@ public class ValidString {
             if (arr[i] == 0) continue;
             if (count == 0 && is.add(arr[i])) ++count;
             else if (count == 1 && is.add(arr[i])) {
-                int curr = is.iterator().next().intValue();
+                int curr = is.iterator().next();
                 if (arr[i] - curr > 1)
                     return "NO";
                 ++count;
