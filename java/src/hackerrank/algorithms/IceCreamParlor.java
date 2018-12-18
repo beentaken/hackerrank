@@ -31,7 +31,8 @@ public class IceCreamParlor {
             int complement = money - sortedMenu[i];
             int location = Arrays.binarySearch(sortedMenu, i + 1, sortedMenu.length, complement);
             if (location >= 0 && location < sortedMenu.length && sortedMenu[location] == complement) {
-                return getIndicesFromValues(menu, sortedMenu[i], complement);
+                int[] a = getIndicesFromValues(menu, sortedMenu[i], complement);
+                System.out.println(a[0] + " " + a[1]);
             }
         }
         return null;
