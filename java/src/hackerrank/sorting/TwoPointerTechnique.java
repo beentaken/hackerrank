@@ -9,7 +9,7 @@ public class TwoPointerTechnique {
         int[] indices = findSumEquals(7,
                 new int[]{1, 2, 3, 4, 5, 7},
                 new int[]{1, 2, 3, 4});
-        System.out.printf(Arrays.toString(indices));
+        System.out.println(Arrays.toString(indices));
     }
 
     private static int[] findSumEquals(int x, int[] a, int[] b) {
