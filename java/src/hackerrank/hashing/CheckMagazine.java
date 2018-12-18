@@ -14,14 +14,14 @@ public class CheckMagazine {
     // Complete the checkMagazine function below.
     static void checkMagazine(String[] magazine, String[] note) {
 
-        Map<String, Integer> magDict = freqDict(magazine);
+        Map<String, Integer> magDict = getStringFrequency(magazine);
 
-        Map<String, Integer> noteDict = freqDict(note);
+        Map<String, Integer> noteDict = getStringFrequency(note);
 
         for (String key : noteDict.keySet()) {
 
             if (!magDict.containsKey(key) ||
-                magDict.get(key) < noteDict.get(key)) {
+                    magDict.get(key) < noteDict.get(key)) {
                 System.out.println("No");
                 return;
             }
@@ -29,14 +29,13 @@ public class CheckMagazine {
         System.out.println("Yes");
     }
 
-    private static Map<String, Integer> freqDict(String[] words) {
+    private static Map<String, Integer> getStringFrequency(String[] words) {
         Map<String, Integer> freqs = new HashMap<>();
         for (String word : words) {
             if (!freqs.containsKey(word)) {
-                freqs.put(word, 1);
-            } else {
-                freqs.put(word, freqs.get(word) + 1);
+                freqs.put(word, 0);
             }
+            freqs.put(word, freqs.get(word) + 1);
         }
         return freqs;
     }
